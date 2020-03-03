@@ -1,111 +1,98 @@
 #include "get_next_line.h"
 
-/* after copying the first part of the buffer (up to new line)
- * this function come to finish the task by saving the rest of
- * the data from the buffer to the saved variable and adds
- * end of string to the end of the saved variable */
-
-void	save_rest(char *buf ,ssize_t len, char *saved)
+char	*ft_strchr(const char *s, int c)
 {
-	int i;
-	int j;
+	int k;
 
-	i = 0;
-	j = 0;
-	while (buf[i] != '\n')
-		i++;
-	i++;
-	while (i < len)
-		saved[j++] = buf[i++];
-	saved[j] = '\0';
+	k = 0;
+	while (s[k])
+	{
+		if ((char)s[k] == (char)c)
+			return ((char *)s + k);
+		k++;
+	}
+	if (s[k] == c)
+		return ((char *)s + k);
+	return (NULL);
 }
 
-/*
- * add the buffer to the end of the line in all cases:
- * # if the last parameter is '\n' : it stops add
- * ing and adds
- *   a '\0' to the end of the line
- * # if the last parameter is EOF : it stops adding and adds
- *   a '\0' to the end of the line
- * # any other case : copy all the buffer and add a '\0' to
- *   the end of line
- **/
-
-void	copy_buf_to_line(char *buf, ssize_t len, char **line, char c)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while ((*line)[i])
-		i++;
-	j = 0;
-	while (j < len && buf[j] != c)
-		(*line)[i++] = buf[j++];
-	(*line)[i] = '\0';
-}
-
-/* search for new line or end of file and returs :
- * # if new line exist : return n
- * # if end of file exist : returns e
- * # if there is no end of file and no new line : returns c*/
-
-char	find_new_end_line(char *buf, ssize_t len)
+int	ft_strlen(char *s)
 {
 	int i;
 
 	i = 0;
-	while (i < len)
-	{
-		if (buf[i] == '\n')
-			return ('n');
-		else if (buf[i] == '\0')
-			return ('e');
-	}
-	return ('c');
+	if (s)
+		while (s[i] != '\0')
+			i++;
+	return (i);
 }
 
-/* # if there is a new line in the buffer : adds the bufer to the end
- *   of line, saves the rest to the static variable and returns 1
- * # if there is end of file : adds the bufer to the end of line and
- *   returns 0
- * # if there is no end of line and no new line in the buffer : adds
- *   all the buffer to the end of line and returns 2*/
-
-int	manage_buf(char *buf, ssize_t len, char *s, char **l)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char res;
+	char *result;
+	int i;
 
-	res = find_new_end_line(buf, len);
-	if (res == 'c')
+	i = 0;
+	if (!(result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) 
+			* sizeof(char))))
+		return (NULL);
+	while (*s1)
+		result[i++] = *s1++;
+	while (*s2)
+		result[i++] = *s2++;
+	result[i] = '\0';
+	return (result);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int	counter;
+	int	n;
+	char	*str;
+
+	counter = 0;
+	n = 0;
+	while (s[n])
+		n++;
+	if (!(str = malloc((n + 1) * sizeof(char))))
+		return (NULL);
+	while (s[counter])
 	{
-		copy_buf_to_line(buf, len, l, '\0');
-		return (2);
+		str[counter] = s[counter];
+		counter++;
 	}
-	else if (res == 'e')
+	str[counter] = '\0';
+	return (str);
+}
+
+int	check_saved(char **saved, char **line)
+{
+	char *ptr;
+
+	if (!*saved)
+		return(0);
+	if ((ptr = ft_strchr(*saved, '\n')))
 	{
-		copy_buf_to_line(buf, len, l, '\0');
-		return (0);
+			*ptr = '\0';
+			*line = ft_strjoin(*line, *saved);
+			*saved = ft_strdup(ptr + 1);
+			return (1);
 	}
-	else if (res == 'n')
+	*line = ft_strjoin(*line, *saved);
+	return (0);
+}
+
+int	check_buff(char **saved, char **line, char *buff)
+{
+	char *ptr;
+
+	if ((ptr = ft_strchr(buff, '\n')))
 	{
-		copy_buf_to_line(buf, len, l, '\n');
-		save_rest(saved, buf);
+		*ptr = '\0';
+		*line = ft_strjoin(*line, buff);
+		*saved = ft_strdup(ptr + 1);
 		return (1);
 	}
+	*line = ft_strjoin(*line, buff);
+	return (0);
 }
-/* copys the saved part to the begening of the line,
- * if we are in the first call of get next line (saved == NULL)
- * we should do nothing, otherwise (there something in saved)
- * we do the task of copying */
-
-void	copy_saved_to_line(char *saved, char **line)
-{
-	int i;
-
-	i = 0;
-	while (saved[i] != '\0')
-		(*line)[i] = saved[i++];
-	(*line)[i] = '\0';
-}
-

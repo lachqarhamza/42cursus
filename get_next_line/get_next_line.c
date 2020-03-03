@@ -1,32 +1,24 @@
 #include "get_next_line.h"
 
-/* the main function : get next line */
-
 int	get_next_line(int fd, char **line)
 {
-	char *buf;
-	static char *saved;
-	int res;
-	ssize_t len;
+	int         i;
+	static char *saved[MAX_FD];
+	char        *buff;
+	int         rd;
+	char	    *ptr;
 
-	if (fd < 0 || !line)
-		return (-1);
-	if (buf = malloc((sizeof(char)) * BUFFER_SIZE))
-		return (-1);
-	copy_saved_to_line(line, saved);
-	while (1)
-	{
-		len = read(fd, buf, BUFFER_SIZE);
-		if(len < 0)
+	i = 0;
+	*line = ft_strdup("");
+	if (check_saved(&saved[fd], line))
+		return (1);
+	if (!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 			return (-1);
-		if (len == 0)
-			return (0);
-		res = manage_buf(buf, len, saved, line);
-		if (res != 2)
-		{
-			free(buf);
-			return (res);
-		}
-
+	while ((rd = read(fd, buff, BUFFER_SIZE)))
+	{
+		buff[rd] = '\0';
+		if (check_buff(&saved[fd], line, buff))
+			return (1);
 	}
+	return (0);
 }

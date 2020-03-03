@@ -2,12 +2,17 @@
 
 # define GET_NEXT_LINE_H
 
-# define BUFFER_SIZE 32
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
+# define MAX_FD 1024
 int	get_next_line(int fd, char **line);
-void	save_rest(char *buf ,ssize_t len, char *saved);
-void	copy_buf_to_line(char *buf, ssize_t len, char **line, char c);
-char	find_new_end_line(char *buf, ssize_t len);
-int	manage_buf(char *buf, ssize_t len, char *s, char **l);
-void	copy_saved_to_line(char *saved, char **line);
+char	*ft_strchr(const char *s, int c);
+int	ft_strlen(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(const char *s);
+int	check_saved(char **saved, char **line);
+int	check_buff(char **saved, char **line, char *buff);
 
 #endif
