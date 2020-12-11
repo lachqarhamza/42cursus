@@ -1,20 +1,60 @@
+# # # #			 # # # #
+#	ft_printf function #
+# # # #			 # # # #
 
-function ft_printf(char format, ...): int
-int step
-while format:
-	if format != '%'
-		print format
+function ft_printf(char pointer format, ...): int
+# counter: global int
+args: va_list
+va_start(args, format)
+while value format:
+	if value format != '%':
+		print value format
 		format++
-	else
-		step <- manage_f(format)
-		format <- format + step
-		step <- manage_w(format)
-		format <- format + step
-		step <- manage_p(format)
-		format <- format + step
-		step <- manage_c(format)
-		format <- format + step
-		
+	else:
+		format <- manage_f(format)
+		format <- manage_w(format, args)
+		format <- manage_p(format)
+		format <- manage_c(format)
+	end if
 end while
+return counter
+end function: ft_printf 
 
+# # # #			# #	# #
+#	manage_f function #
+# # # #			# # # #
+
+function manage_f(char pointer format): char pointer
+# stored_flag : global char
+while value format = '-' or value format = '0':
+	if value format = '0' and stored_flag != '-':
+		sored_flag <- '0'
+	else:
+		stored_flag <- '-'
+	end if
+	format++
+end while
+return format
+end function: ft_gf
+
+# # # #		    # # # #
+#	manage_w function #
+# # # #			# # # #
+
+function manage_w(char pointer format, va_list args): char pointer
+# stored_w: global int
+while value format = ' ':
+	print ' '
+	format++
+end while
+if value format = '*':
+	stored_w <- va_agr(args, int)
+	if stored_w < 0:
+		stored_f <- '-'
+	end if
+	while format = '*':
+		format++
+	end while
+else:
+	stored_w <- ft_atoi
 
