@@ -1,0 +1,20 @@
+
+function ft_printf(char format, ...): int
+int step
+while format:
+	if format != '%'
+		print format
+		format++
+	else
+		step <- manage_f(format)
+		format <- format + step
+		step <- manage_w(format)
+		format <- format + step
+		step <- manage_p(format)
+		format <- format + step
+		step <- manage_c(format)
+		format <- format + step
+		
+end while
+
+
