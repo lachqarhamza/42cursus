@@ -6,7 +6,7 @@ void		ft_xp(char *str, int *i, int *j)
 
 	if (global.c == 'p')
 		write(1, "0x", 2);
-	ft_zeropadding(global, i, j);
+	ft_zero_padding(i, j);
 	if (!ft_strncmp(str, "0", 2) && global.pnt > 0
 	&& !global.p)
 	{

@@ -7,17 +7,17 @@ char    *manage_p(char *format, va_list args)
         format++;
         if (*format == '*')
         {
-            global->p = va_arg(args, int);
+            global.p = va_arg(args, int);
             while (*format == '*')
                 format++;
         }
         else
         {
-            global->p = ft_atoi(format);
+            global.p = ft_atoi(format);
             while (ft_isdigit(*format))
                 format++;
         }
-        global->pnt = 1;
+        global.pnt = 1;
     }
     return (format);
 }

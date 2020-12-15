@@ -4,13 +4,13 @@ char    *manage_f(char *format)
 {
     while (*format == '-' || *format == '0')
     {
-        if (*format == '0' && global->f != '-')
+        if (*format == '0' && global.f != '-')
         {
-            global->f = '0';
+            global.f = '0';
         }
         else
         {
-            global->f = '-';
+            global.f = '-';
         }
         format++;
     }

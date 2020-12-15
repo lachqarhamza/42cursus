@@ -1,8 +1,12 @@
+#include "ft_printf.h"
+
 int			ft_printf(char *format, ...)
 {
 	va_list			args;
 
 	va_start(args, format);
+	counter = 0;
+	ft_init_globals();
 	while (*format)
 	{
 		if (*format != '%')
@@ -10,11 +14,11 @@ int			ft_printf(char *format, ...)
 		else
 		{
 			manage_f(format);
-			manage_w(format);
-			manage_p(format);
-			manage_c(format);
+			manage_w(format, args);
+			manage_p(format, args);
+			manage_c(format, args);
 		}
 	}
-	va_end(ars); // i am not sure that i didn't call it somewhere else
+	va_end(args);
 	return (counter);
 }
