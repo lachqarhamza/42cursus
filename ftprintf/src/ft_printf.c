@@ -10,13 +10,13 @@ int			ft_printf(char *format, ...)
 	while (*format)
 	{
 		if (*format != '%')
-			ft_put_char(format);
+			ft_put_char(&format);
 		else
 		{
-			manage_f(format);
-			manage_w(format, args);
-			manage_p(format, args);
-			manage_c(format, args);
+			manage_f(&format);
+			manage_w(&format, args);
+			manage_p(&format, args);
+			manage_c(&format, args);
 		}
 	}
 	va_end(args);

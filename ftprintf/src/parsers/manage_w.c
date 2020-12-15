@@ -1,30 +1,29 @@
 #include "../ft_printf.h"
 
-char    *manage_w(char *format, va_list args)
+void    manage_w(char **format, va_list args)
 {
-    while (*format == ' ')
+    while (**format == ' ')
     {
         write(1, " ", 1);
-        format++;
+        (*format)++;
     }
-    if (*format == '*')
+    if (**format == '*')
     {
         global.w = va_arg(args, int);
         if (global.w < 0)
             global.f = '-';
-        while (*format == '*')
-            format++;
+        while (**format == '*')
+            (*format)++;
     }
     else
     {
-        global.w = ft_atoi(format);
-        while (ft_isdigit(*format))
-            format++;
+        global.w = ft_atoi(*format);
+        while (ft_isdigit(**format))
+            (*format)++;
     }
     if (global.w < 0)
     {
         global.w = global.w * -1;
         global.f = '-';
     }
-    return (format);
 }

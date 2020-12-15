@@ -1,10 +1,11 @@
 #include "../ft_printf.h"
 
-char    *manage_f(char *format)
+void    manage_f(char **format)
 {
-    while (*format == '-' || *format == '0')
+    (*format)++;
+    while (**format == '-' || **format == '0')
     {
-        if (*format == '0' && global.f != '-')
+        if (**format == '0' && global.f != '-')
         {
             global.f = '0';
         }
@@ -12,7 +13,6 @@ char    *manage_f(char *format)
         {
             global.f = '-';
         }
-        format++;
+        (*format)++;
     }
-    return (format);
 }
