@@ -18,6 +18,7 @@ void	manage_c(char **format, va_list args)
 	{
 		g_global.c = **format;
 		g_counter += ft_manage(args);
+		ft_init_globals();
 	}
 	if (**format != '\0')
 		(*format)++;
