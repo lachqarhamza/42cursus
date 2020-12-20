@@ -6,7 +6,7 @@
 /*   By: hlachqar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:30:41 by hlachqar          #+#    #+#             */
-/*   Updated: 2020/12/19 20:30:43 by hlachqar         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:48:01 by hlachqar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int			ft_printf(char *format, ...)
 	va_list			args;
 
 	va_start(args, format);
-	g_counter = 0;
-	ft_init_globals();
+	ft_init_globals(1);
 	while (*format)
 	{
 		if (*format != '%')
@@ -29,6 +28,7 @@ int			ft_printf(char *format, ...)
 			manage_w(&format, args);
 			manage_p(&format, args);
 			manage_c(&format, args);
+			ft_init_globals(0);
 		}
 	}
 	va_end(args);

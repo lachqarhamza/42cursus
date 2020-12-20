@@ -6,7 +6,7 @@
 /*   By: hlachqar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:34:25 by hlachqar          #+#    #+#             */
-/*   Updated: 2020/12/20 02:13:14 by hlachqar         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:17:20 by hlachqar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	manage_c(char **format, va_list args)
 	{
 		g_global.c = **format;
 		g_counter += ft_manage(args);
-		ft_init_globals();
 	}
 	if (**format != '\0')
 		(*format)++;

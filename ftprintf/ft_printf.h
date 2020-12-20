@@ -6,7 +6,7 @@
 /*   By: hlachqar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:31:03 by hlachqar          #+#    #+#             */
-/*   Updated: 2020/12/19 20:53:46 by hlachqar         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:48:21 by hlachqar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_list
 t_globals		g_global;
 int				g_counter;
 
-void			ft_init_globals();
+void			ft_init_globals(int with_counter);
 int				ft_printf(char *format, ...);
 int				ft_get_n_zr(long long num);
 int				ft_is_c(char c);
