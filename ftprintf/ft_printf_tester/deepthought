@@ -1,0 +1,8 @@
+TESTED : "TEST TEST 0000%%%*.*s%%%-15.8dTEST%-15.8u0000000\t%%%15%%.3%", 7,5, "ABC",15,0
+printf :    |TEST TEST 0000%    ABC%00000015       TEST00000000       0000000	%              %%	Return: 82
+ft_printf : |TEST TEST 0000%    ABC%00000015       TEST00000000       0000000	%%              %	Return: 82
+
+TESTED : "TEST TEST 0000%%%*.*s%%%-15.8dTEST%-15.8u0000000\t%%%15%%.3% %---15d %00015x", 7,5, "ABC",15,0,20,0x99
+printf :    |TEST TEST 0000%    ABC%00000015       TEST00000000       0000000	%              %% 20              000000000000099	Return: 114
+ft_printf : |TEST TEST 0000%    ABC%00000015       TEST00000000       0000000	%%              % 020             099            	Return: 114
+
